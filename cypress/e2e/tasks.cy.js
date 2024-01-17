@@ -1,6 +1,16 @@
 /// <reference types="cypress" />
 
 describe("tarefas", () => {
+
+  let testData;
+
+  before(() => {
+    cy.fixture('tasks').then(t => {
+      testData = t
+    })
+  })
+
+
   context("cadastro", () => {
     it("deve cadastrar uma nova tarefa", () => {
       const taskName = "Estudar Cypress";
@@ -13,10 +23,7 @@ describe("tarefas", () => {
     });
 
     it("não deve permitir tarefa duplicada", () => {
-      const task = {
-        name: "Estudar Robot Framework",
-        is_done: false,
-      };
+      const task = testData.dup
 
       cy.removeTaskByName(task.name);
 
@@ -37,14 +44,11 @@ describe("tarefas", () => {
 
   context("atualização", () => {
     it("deve concluir uma tarefa", () => {
-        const task = {
-            name: 'Estudar java',
-            is_done: false
-        }
+        const task = testData.finishTask
 
         cy.removeTaskByName(task.name)
         cy.postTask(task)
-        cy.visit('http://localhost:8080')
+        cy.visit('/')
 
         cy.contains('p', task.name)
             .parent()
@@ -61,14 +65,11 @@ describe("tarefas", () => {
 
   context("exclusão", () => {
     it("deve excluir uma tarefa", () => {
-        const task = {
-            name: 'Estudar codeceptJS',
-            is_done: false
-        }
+        const task = testData.removeTask
 
         cy.removeTaskByName(task.name)
         cy.postTask(task)
-        cy.visit('http://localhost:8080')
+        cy.visit('/')
 
         cy.contains('p', task.name)
             .parent()

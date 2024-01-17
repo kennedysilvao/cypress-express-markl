@@ -1,0 +1,14 @@
+{
+    "dup": {
+        "name": "Estudar Robot Framework",
+        "is_done": false
+    },
+    "finishTask": {
+        "name": "Estudar java",
+        "is_done": false
+    },
+    "removeTask": {
+        "name": "Estudar codeceptJS",
+        "is_done": false
+    }
+}

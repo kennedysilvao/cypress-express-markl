@@ -4,6 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "12.2.0"
+    "@mmisty/cypress-allure-adapter": "^0.16.2",
+    "allure-commandline": "^2.25.0",
+    "cypress": "12.2.0",
+    "http-server": "^14.1.1"
+  },
+  "scripts": {
+    "e2e": "cypress run --env allure=true",
+    "report:allure": "allure generate allure-results --clean -o allure-report && allure open  allure-report",
+    "test:allure": "npm run e2e && npm run report:allure"
   }
 }
